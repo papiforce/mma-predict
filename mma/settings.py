@@ -63,7 +63,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "mma.pipelines.MmaPipeline": 300,
+    "mma.pipelines.DataProcessingPipeline": 100,
+    "mma.pipelines.UfcPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
