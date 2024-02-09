@@ -2,8 +2,8 @@ import scrapy
 import json
 from datetime import datetime
 
-class FighterSpider(scrapy.Spider):
-    name = "fighter"
+class FightersSpider(scrapy.Spider):
+    name = "fighters"
     allowed_domains = ["ufcstats.com"]
     start_urls = ["http://ufcstats.com/statistics/fighters"]
 
@@ -12,7 +12,7 @@ class FighterSpider(scrapy.Spider):
         fighter_links = response.css('td.b-statistics__table-col a::attr(href)').getall()
         for link in fighter_links:
             if link is not None:
-                yield response.follow(link, self.parse_fighter)
+                yield response.follow(link, self.parse_fighters)
 
         # Follow pagination links
         next_pages = response.css('ul.b-statistics__paginate a::attr(href)').getall()
@@ -20,7 +20,7 @@ class FighterSpider(scrapy.Spider):
             if next_page is not None:
                 yield response.follow(next_page, self.parse)
 
-    def parse_fighter(self, response):
+    def parse_fighters(self, response):
         # Extract data from the fighter's page
         full_name = response.css('span.b-content__title-highlight::text').get().strip()
         weight = response.css('li.b-list__box-list-item:contains("Weight:")::text').getall()[-1].strip()
