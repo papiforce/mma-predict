@@ -2,7 +2,7 @@ import scrapy
 from mma.items import UfcItem
 
 class FightersSpider(scrapy.Spider):
-    name = "fighter"
+    name = "fighters"
     allowed_domains = ["ufcstats.com"]
     start_urls = ["http://ufcstats.com/statistics/fighters"]
 
